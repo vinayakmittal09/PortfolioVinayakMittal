@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Vinayak Mittal</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      cursor: auto;
+    }
+
+    .admin-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px var(--gutter) 100px;
+    }
+
+    .admin-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 34px;
+      flex-wrap: wrap;
+    }
+
+    .admin-tab {
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .admin-tab.active {
+      background: var(--ivory);
+      color: var(--black);
+      border-color: var(--ivory);
+    }
+
+    .admin-panel {
+      display: none;
+    }
+
+    .admin-panel.active {
+      display: block;
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .admin-table th {
+      text-align: left;
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .admin-table td {
+      padding: 12px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .admin-table tr.unread {
+      color: var(--accent);
+    }
+
+    .a-btn {
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-strong);
+      padding: 6px 12px;
+      margin-right: 6px;
+    }
+
+    .a-btn:hover {
+      background: var(--ivory);
+      color: var(--black);
+    }
+
+    .a-btn.danger:hover {
+      background: #c88;
+      border-color: #c88;
+      color: var(--black);
+    }
+
+    #login-panel {
+      max-width: 360px;
+      margin: 140px auto;
+      text-align: center;
+    }
+
+    .form-field {
+      margin-bottom: 22px;
+      text-align: left;
+    }
+
+    .form-field label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--ivory);
+      padding: 10px 12px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .form-field select option {
+      background: #000;
+    }
+
+    #login-error,
+    #admin-msg {
+      font-size: 12px;
+      color: #c88;
+      min-height: 16px;
+      margin-top: 10px;
+    }
+
+    #admin-msg.ok {
+      color: var(--accent);
+    }
+
+    .proj-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 26px;
+    }
+
+    .proj-form-grid .full {
+      grid-column: 1/-1;
+    }
+
+    #logout-btn {
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-strong);
+      padding: 8px 16px;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      border: 1px solid var(--border-strong);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="site-nav" class="scrolled" style="position:static;">
+    <a href="index.html" class="nav-logo">Vinayak Mittal</a>
+    <span style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);">Admin
+      Dashboard</span>
+    <button id="logout-btn" style="display:none;">Log Out</button>
+  </nav>
+
+  <div id="login-panel" class="admin-wrap">
+    <h1 class="display" style="font-size:34px;margin-bottom:30px;">Admin Login</h1>
+    <div class="form-field">
+      <label for="a-email">Email</label>
+      <input type="email" id="a-email" autocomplete="username">
+    </div>
+    <div class="form-field">
+      <label for="a-pass">Password</label>
+      <input type="password" id="a-pass" autocomplete="current-password">
+    </div>
+    <button class="btn solid" id="login-btn" style="width:100%;justify-content:center;"><span>Log In</span></button>
+    <div id="login-error"></div>
+  </div>
+
+  <div id="dashboard-panel" class="admin-wrap" style="display:none;">
+    <div class="admin-head">
+      <h1 class="display" style="font-size:36px;">Dashboard</h1>
+      <span id="admin-msg"></span>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="projects">Projects</button>
+      <button class="admin-tab" data-tab="new-project">Add Project</button>
+      <button class="admin-tab" data-tab="testimonials">Testimonials</button>
+      <button class="admin-tab" data-tab="messages">Contact Messages</button>
+    </div>
+
+    <!-- PROJECTS LIST -->
+    <div class="admin-panel active" id="panel-projects">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Order</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Year</th>
+            <th>Featured</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="admin-projects-body"></tbody>
+      </table>
+    </div>
+
+    <!-- ADD / EDIT PROJECT -->
+    <div class="admin-panel" id="panel-new-project">
+      <h3 class="display" id="proj-form-heading" style="font-size:22px;margin-bottom:20px;">New Project</h3>
+      <input type="hidden" id="p-id">
+      <div class="proj-form-grid">
+        <div class="form-field"><label>Title</label><input id="p-title"></div>
+        <div class="form-field"><label>Slug (auto if empty)</label><input id="p-slug"></div>
+        <div class="form-field"><label>Category</label>
+          <select id="p-category">
+            <option value="photography">Photography</option>
+            <option value="videography">Videography</option>
+            <option value="editing">Editing</option>
+            <option value="design">Graphic Design</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Year</label><input id="p-year" type="number" value="2026"></div>
+        <div class="form-field"><label>Location</label><input id="p-location"></div>
+        <div class="form-field"><label>Order</label><input id="p-order" type="number" value="0"></div>
+        <div class="form-field"><label>Cover Image URL</label><input id="p-cover"></div>
+        <div class="form-field"><label>Featured</label>
+          <select id="p-featured">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        <div class="form-field full"><label>Short Description</label><textarea id="p-desc" rows="3"></textarea></div>
+        <div class="form-field full"><label>Gallery Image URLs (one per line)</label><textarea id="p-gallery"
+            rows="4"></textarea></div>
+      </div>
+      <button class="btn solid" id="save-project-btn"><span>Save Project</span></button>
+      <button class="a-btn" id="reset-project-form" style="margin-left:12px;">Clear Form</button>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="admin-panel" id="panel-testimonials">
+      <div class="proj-form-grid">
+        <div class="form-field full"><label>Quote</label><textarea id="t-quote" rows="2"></textarea></div>
+        <div class="form-field"><label>Client Name</label><input id="t-name"></div>
+        <div class="form-field"><label>Role / Company</label><input id="t-role"></div>
+        <div class="form-field"><label>Avatar URL</label><input id="t-avatar"></div>
+      </div>
+      <button class="btn solid" id="save-testi-btn"><span>Add Testimonial</span></button>
+      <table class="admin-table" style="margin-top:30px;">
+        <thead>
+          <tr>
+            <th>Quote</th>
+            <th>Client</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="admin-testi-body"></tbody>
+      </table>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="admin-panel" id="panel-messages">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Message</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="admin-messages-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work — Vinayak Mittal</title>
+<meta name="description" content="Selected photography, film and design work by Vinayak Mittal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="work">
+
+<div id="loader"><div class="loader-name">Vinayak Mittal</div><div class="loader-sub">Visuals / Motion / Design</div><div class="loader-count counter" id="loader-count">00</div></div>
+<div id="scroll-progress"></div>
+<div id="cursor"></div><div id="cursor-label"></div>
+
+<nav id="site-nav">
+  <a href="index.html" class="nav-logo">Vinayak Mittal</a>
+  <ul class="nav-links">
+    <li><a href="work.html" class="link-underline active">Work</a></li>
+    <li><a href="about.html" class="link-underline">About</a></li>
+    <li><a href="index.html#services" class="link-underline">Services</a></li>
+    <li><a href="contact.html" class="link-underline">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Let's Talk</a>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+<div id="mobile-menu">
+  <a href="work.html">Work</a><a href="about.html">About</a><a href="index.html#services">Services</a><a href="contact.html">Contact</a>
+  <div class="mm-meta"><span>hello@kaiasher.com</span><span>Lisbon, Portugal</span></div>
+</div>
+
+<section class="page-hero container">
+  <div class="eyebrow reveal">Selected Work</div>
+  <h1 class="display reveal">Everything I've made worth showing.</h1>
+</section>
+
+<section class="section" style="padding-top:20px;">
+  <div class="container">
+    <div class="filter-bar reveal" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="photography">Photography</button>
+      <button class="filter-btn" data-filter="videography">Videography</button>
+      <button class="filter-btn" data-filter="editing">Editing</button>
+      <button class="filter-btn" data-filter="design">Graphic Design</button>
+    </div>
+    <div class="work-list" id="all-work-list"></div>
+  </div>
+</section>
+
+<div id="footer-mount"></div>
+
+<div id="lightbox">
+  <button class="lb-close" id="lb-close">Close ✕</button>
+  <button class="lb-prev" id="lb-prev">← Prev</button>
+  <div id="lb-media"></div>
+  <button class="lb-next" id="lb-next">Next →</button>
+  <div class="lb-caption" id="lb-caption"></div>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<script src="js/data-fallback.js"></script>
+<script src="js/main.js"></script>
+<script src="js/animations.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/gallery.js"></script>
+</body>
+</html>
